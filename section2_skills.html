@@ -3,309 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Skills — Syed Hamza</title>
+<title>Skills & Background — Syed Hamza</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#ffffff; --bg2:#f8fafb; --bg3:#f1f5f9;
+  --teal:#0d9488; --teal2:#14b8a6;
+  --dark:#0f172a; --mid:#334155; --muted:#64748b; --light:#94a3b8;
+  --border:#e2e8f0;
+}
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--dark); font-family:'DM Sans',sans-serif; font-weight:300; overflow-x:hidden; }
 
-  :root {
-    --navy:   #ffffff;
-    --navy2:  #f8fafb;
-    --navy3:  #f1f5f9;
-    --gold:   #0d9488;
-    --gold2:  #14b8a6;
-    --gold3:  #0f766e;
-    --white:  #0f172a;
-    --muted:  #64748b;
-    --border: #e2e8f0;
-  }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:20px 56px; background:rgba(255,255,255,0.92); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+.nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; letter-spacing:0.08em; color:var(--dark); }
+.nav-logo span { color:var(--teal); }
+.nav-links { display:flex; gap:32px; list-style:none; align-items:center; }
+.nav-links a { color:var(--muted); text-decoration:none; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+.nav-links a:hover { color:var(--teal); }
+.nav-links a.active { color:var(--teal); font-weight:500; }
+.nav-cta { background:var(--teal) !important; color:#fff !important; padding:7px 18px; border-radius:4px; }
+.nav-cta:hover { background:#0f766e !important; }
 
-  html { scroll-behavior: smooth; }
+.page { max-width:1280px; margin:0 auto; padding:100px 56px 80px; }
 
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* Hero block */
+.hero-block {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:48px; align-items:center;
+  padding:40px 44px; border:1px solid var(--border);
+  border-radius:10px; background:var(--bg2);
+  margin-bottom:28px;
+  opacity:0; animation:fadeUp 0.8s 0.1s forwards;
+}
+.hero-eyebrow { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.hero-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--teal); }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.4rem,4vw,3.4rem); font-weight:300; line-height:1.1; color:var(--dark); }
+.hero-title em { font-style:italic; color:var(--teal); }
+.hero-sub { margin-top:14px; font-size:0.82rem; color:var(--muted); line-height:1.7; max-width:320px; }
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background: radial-gradient(circle at 80% 20%, rgba(13,148,136,0.05) 0%, transparent 50%),
-      radial-gradient(circle at 10% 80%, rgba(13,148,136,0.03) 0%, transparent 40%);
-    pointer-events: none; z-index: 0;
-  }
+.bar-group { display:flex; flex-direction:column; gap:14px; }
+.bar-label-row { display:flex; justify-content:space-between; margin-bottom:5px; }
+.bar-label { font-size:0.75rem; color:var(--mid); }
+.bar-count { font-size:0.72rem; color:var(--teal); font-weight:500; }
+.bar-track { height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.bar-fill { height:100%; background:var(--teal); border-radius:3px; width:0; transition:width 1.2s ease; }
+.bar-sub { color:var(--light); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
 
-  body::after {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none; z-index: 0;
-  }
+/* Ticker */
+.ticker-wrap {
+  overflow:hidden; border:1px solid var(--border);
+  border-radius:8px; padding:13px 0; background:var(--bg2);
+  margin-bottom:48px;
+  opacity:0; animation:fadeUp 0.8s 0.25s forwards;
+}
+.ticker-track { display:flex; white-space:nowrap; }
+.ticker-inner { display:inline-flex; gap:32px; padding:0 16px; animation:ticker 45s linear infinite; }
+.ticker-inner:hover { animation-play-state:paused; }
+.tk { font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--light); flex-shrink:0; }
+.tk.hi { color:var(--teal); font-weight:500; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-100%)} }
 
-  /* ── Nav ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 56px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-  }
+/* Sticky tabs */
+.sticky-tabs {
+  position:sticky; top:64px; z-index:50;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  margin:0 -56px 48px;
+  padding:12px 56px;
+  display:flex; gap:8px; flex-wrap:wrap;
+  opacity:0; animation:fadeUp 0.8s 0.35s forwards;
+}
+.cat-tab {
+  padding:7px 18px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:transparent;
+  color:var(--muted);
+  font-size:0.72rem; letter-spacing:0.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:background 0.2s, color 0.2s, border-color 0.2s;
+}
+.cat-tab.active, .cat-tab:hover { background:var(--teal); color:#fff; border-color:var(--teal); }
 
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-  }
+/* Skills blocks */
+.skills-block { margin-bottom:60px; }
+.block-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.block-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: color 0.25s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+.cols-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.cols-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
 
-  /* ── Page wrapper ── */
-  .page {
-    position: relative;
-    z-index: 1;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 140px 56px 100px;
-  }
+.col { padding:28px 26px; border-right:1px solid var(--border); background:var(--bg2); transition:background 0.2s; opacity:0; animation:fadeUp 0.6s forwards; }
+.col:last-child { border-right:none; }
+.col:hover { background:var(--bg); }
+.col-title { font-size:0.72rem; font-weight:500; color:var(--dark); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 
-  /* ── Section header ── */
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 72px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.1s forwards;
-  }
+.tools { display:flex; flex-direction:column; gap:0; margin-bottom:14px; }
+.tool-item { font-size:0.8rem; color:var(--mid); padding:6px 0; border-bottom:1px solid rgba(226,232,240,0.6); transition:color 0.15s; }
+.tool-item:last-child { border-bottom:none; }
+.tool-item:hover { color:var(--teal); }
 
-  .header-left { display: flex; flex-direction: column; gap: 14px; }
+.skills-divider { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--light); margin:14px 0 10px; }
+.skill-item { font-size:0.78rem; color:var(--muted); padding:5px 0; border-bottom:1px solid rgba(226,232,240,0.4); font-style:italic; }
+.skill-item:last-child { border-bottom:none; }
 
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .eyebrow::before {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: var(--gold);
-  }
+/* Education */
+.edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.edu-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:22px; display:flex; flex-direction:column; gap:7px; opacity:0; animation:fadeUp 0.6s forwards; transition:border-color 0.25s, box-shadow 0.25s; }
+.edu-card:hover { border-color:var(--teal2); box-shadow:0 4px 16px rgba(13,148,136,0.07); }
+.edu-degree { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:400; color:var(--dark); line-height:1.3; }
+.edu-school { font-size:0.76rem; color:var(--teal); font-weight:500; }
+.edu-period { font-size:0.7rem; color:var(--light); letter-spacing:0.06em; }
+.edu-detail { font-size:0.74rem; color:var(--mid); line-height:1.55; margin-top:3px; }
+.badge-row { display:flex; gap:5px; flex-wrap:wrap; margin-top:4px; }
+.ebadge { font-size:0.6rem; letter-spacing:0.07em; text-transform:uppercase; padding:3px 9px; border-radius:10px; font-weight:500; }
+.ebadge.green { background:rgba(13,148,136,0.1); color:var(--teal); }
+.ebadge.blue { background:rgba(59,130,246,0.1); color:#2563eb; }
+.ebadge.amber { background:rgba(245,158,11,0.1); color:#d97706; }
 
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 4vw, 3.6rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
+/* Awards */
+.awards-list { display:flex; flex-direction:column; gap:8px; }
+.award-item { display:flex; align-items:center; gap:16px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:13px 18px; opacity:0; animation:fadeUp 0.6s forwards; transition:border-color 0.2s, transform 0.2s; }
+.award-item:hover { border-color:var(--teal2); transform:translateX(4px); }
+.award-year { font-size:0.68rem; color:var(--light); letter-spacing:0.1em; min-width:42px; font-weight:500; }
+.award-name { font-size:0.82rem; color:var(--dark); }
 
-  .section-sub {
-    font-size: 0.88rem;
-    color: var(--muted);
-    max-width: 480px;
-    line-height: 1.75;
-    text-align: right;
-  }
+footer { border-top:1px solid var(--border); padding:28px 56px; max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--dark); letter-spacing:0.08em; }
+.footer-logo span { color:var(--teal); }
+.footer-text { font-size:0.72rem; color:var(--light); }
+.footer-link { color:var(--muted); text-decoration:none; font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; transition:color 0.2s; }
+.footer-link:hover { color:var(--teal); }
 
-  /* ── Skill category block ── */
-  .skill-block {
-    border-top: 1px solid var(--border);
-    padding: 48px 0;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 60px;
-    opacity: 0;
-    animation: fadeUp 0.8s forwards;
-  }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
-  .skill-block:nth-child(1) { animation-delay: 0.2s; }
-  .skill-block:nth-child(2) { animation-delay: 0.35s; }
-  .skill-block:nth-child(3) { animation-delay: 0.5s; }
-  .skill-block:nth-child(4) { animation-delay: 0.65s; }
+.col:nth-child(1){animation-delay:0.12s} .col:nth-child(2){animation-delay:0.22s} .col:nth-child(3){animation-delay:0.32s}
+.edu-card:nth-child(1){animation-delay:0.15s} .edu-card:nth-child(2){animation-delay:0.25s} .edu-card:nth-child(3){animation-delay:0.35s} .edu-card:nth-child(4){animation-delay:0.45s}
+.award-item:nth-child(1){animation-delay:0.12s} .award-item:nth-child(2){animation-delay:0.22s} .award-item:nth-child(3){animation-delay:0.32s} .award-item:nth-child(4){animation-delay:0.42s}
 
-  .block-label {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-top: 4px;
-  }
-
-  .block-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    color: rgba(13,148,136,0.15);
-    line-height: 1;
-  }
-
-  .block-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* ── Skill cards ── */
-  .skill-cards { display: flex; flex-direction: column; gap: 16px; }
-
-  .skill-card {
-    background: var(--navy2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px 32px;
-    display: grid;
-    grid-template-columns: 180px 1fr auto;
-    align-items: center;
-    gap: 32px;
-    transition: background 0.25s, border-color 0.25s;
-    cursor: default;
-  }
-
-  .skill-card:hover {
-    background: var(--navy3);
-    border-color: rgba(13,148,136,0.4);
-  }
-
-  .skill-name-wrap { display: flex; flex-direction: column; gap: 4px; }
-
-  .skill-name {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--white);
-    letter-spacing: 0.02em;
-  }
-
-  .skill-sub {
-    font-size: 0.74rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-
-  .skill-desc {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── Progress bar ── */
-  .skill-level { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; min-width: 110px; }
-
-  .level-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .bar-track {
-    width: 110px;
-    height: 2px;
-    background: rgba(13,148,136,0.12);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--gold2));
-    border-radius: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1s 0.8s ease;
-  }
-
-  body.loaded .bar-fill { transform: scaleX(1); }
-
-  /* ── Proficiency key ── */
-  .proficiency-key {
-    margin-top: 56px;
-    border-top: 1px solid var(--border);
-    padding-top: 32px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.9s forwards;
-  }
-
-  .key-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .key-items { display: flex; gap: 24px; flex-wrap: wrap; }
-
-  .key-item { display: flex; align-items: center; gap: 8px; }
-
-  .key-bar {
-    width: 40px;
-    height: 2px;
-    border-radius: 2px;
-  }
-
-  .key-bar.l1 { background: rgba(13,148,136,0.25); }
-  .key-bar.l2 { background: rgba(13,148,136,0.5); }
-  .key-bar.l3 { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
-
-  .key-text {
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-
-  /* ── Animations ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 900px) {
-    .page { padding: 110px 28px 60px; }
-    nav { padding: 18px 28px; }
-    .nav-links { display: none; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .section-sub { text-align: left; }
-    .skill-block { grid-template-columns: 1fr; gap: 24px; }
-    .skill-card { grid-template-columns: 1fr; gap: 16px; }
-    .skill-level { align-items: flex-start; }
-  }
+@media(max-width:1024px){ .cols-3,.cols-2{grid-template-columns:1fr} .col{border-right:none;border-bottom:1px solid var(--border)} .col:last-child{border-bottom:none} .hero-block{grid-template-columns:1fr} }
+@media(max-width:900px){ .page{padding:90px 20px 60px} nav{padding:16px 20px} .nav-links{display:none} .edu-grid{grid-template-columns:1fr} .sticky-tabs{margin:0 -20px 36px;padding:12px 20px} footer{flex-direction:column;gap:12px;text-align:center;padding:24px} }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="section6_home.html" style="text-decoration:none;"><div class="nav-logo">SH · Portfolio</div></a>
+  <a href="index.html" style="text-decoration:none;"><div class="nav-logo">Syed <span>Hamza</span></div></a>
   <ul class="nav-links">
     <li><a href="section1_introduction.html">About</a></li>
     <li><a href="section2_skills.html" class="active">Skills</a></li>
@@ -317,189 +165,250 @@
 
 <div class="page">
 
-  <!-- Header -->
-  <div class="section-header">
-    <div class="header-left">
-      <div class="eyebrow">Section 02</div>
-      <h1 class="section-title">Technical <em>skills</em><br>& tools</h1>
+  <!-- Hero: title left, bars right -->
+  <div class="hero-block">
+    <div>
+      <div class="hero-eyebrow">Section 02</div>
+      <h1 class="hero-title">Skills &<br><em>background</em></h1>
+      <p class="hero-sub">A cross-disciplinary toolkit spanning technology, intelligence, data, marketing, and design.</p>
     </div>
-    <p class="section-sub">
-      A focused toolkit built around real-world BI work — from querying databases to building interactive dashboards that drive decisions.
-    </p>
+    <div>
+      <div class="bar-sub">Tools per domain</div>
+      <div class="bar-group">
+        <div>
+          <div class="bar-label-row"><span class="bar-label">Design, Creative & Development</span><span class="bar-count">12</span></div>
+          <div class="bar-track"><div class="bar-fill" style="opacity:1;" data-w="100"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span class="bar-label">BI & Power Platform</span><span class="bar-count">10</span></div>
+          <div class="bar-track"><div class="bar-fill" style="opacity:0.85;" data-w="83"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span class="bar-label">AI, ML & IoT</span><span class="bar-count">6</span></div>
+          <div class="bar-track"><div class="bar-fill" style="opacity:0.65;" data-w="50"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span class="bar-label">Marketing Analytics</span><span class="bar-count">6</span></div>
+          <div class="bar-track"><div class="bar-fill" style="opacity:0.65;" data-w="50"></div></div>
+        </div>
+        <div>
+          <div class="bar-label-row"><span class="bar-label">Data & Databases</span><span class="bar-count">6</span></div>
+          <div class="bar-track"><div class="bar-fill" style="opacity:0.65;" data-w="50"></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Block 1: Query & Data Languages -->
-  <div class="skill-blocks">
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-inner">
+        <span class="tk hi">Power BI</span><span class="tk">DAX</span><span class="tk">SQL</span><span class="tk hi">Wattif</span><span class="tk">Thingario</span><span class="tk">RadixIoT</span><span class="tk hi">TDengine</span><span class="tk">TensorFlow</span><span class="tk">Scikit-learn</span><span class="tk hi">Tableau</span><span class="tk">ENest</span><span class="tk">Power Automate</span><span class="tk hi">MongoDB</span><span class="tk">Supabase</span><span class="tk">BigQuery</span><span class="tk hi">Figma</span><span class="tk">Webflow</span><span class="tk">WordPress</span><span class="tk hi">Photoshop</span><span class="tk">Illustrator</span><span class="tk">Premiere Pro</span><span class="tk hi">After Effects</span><span class="tk">SketchUp</span><span class="tk">Lumion</span><span class="tk hi">Google Analytics</span><span class="tk">Meta Business</span><span class="tk">LinkedIn Ads</span><span class="tk hi">TikTok Business</span><span class="tk">GitHub</span><span class="tk">Python</span>
+      </span>
+      <span class="ticker-inner" aria-hidden="true">
+        <span class="tk hi">Power BI</span><span class="tk">DAX</span><span class="tk">SQL</span><span class="tk hi">Wattif</span><span class="tk">Thingario</span><span class="tk">RadixIoT</span><span class="tk hi">TDengine</span><span class="tk">TensorFlow</span><span class="tk">Scikit-learn</span><span class="tk hi">Tableau</span><span class="tk">ENest</span><span class="tk">Power Automate</span><span class="tk hi">MongoDB</span><span class="tk">Supabase</span><span class="tk">BigQuery</span><span class="tk hi">Figma</span><span class="tk">Webflow</span><span class="tk">WordPress</span><span class="tk hi">Photoshop</span><span class="tk">Illustrator</span><span class="tk">Premiere Pro</span><span class="tk hi">After Effects</span><span class="tk">SketchUp</span><span class="tk">Lumion</span><span class="tk hi">Google Analytics</span><span class="tk">Meta Business</span><span class="tk">LinkedIn Ads</span><span class="tk hi">TikTok Business</span><span class="tk">GitHub</span><span class="tk">Python</span>
+      </span>
+    </div>
+  </div>
 
-    <div class="skill-block">
-      <div class="block-label">
-        <span class="block-num">01</span>
-        <span class="block-title">Query & data languages</span>
+  <!-- Sticky tabs -->
+  <div class="sticky-tabs">
+    <button class="cat-tab active" onclick="goTo('sec-tech',this)">Technology & Data</button>
+    <button class="cat-tab" onclick="goTo('sec-marketing',this)">Marketing & Design</button>
+    <button class="cat-tab" onclick="goTo('sec-education',this)">Education</button>
+    <button class="cat-tab" onclick="goTo('sec-awards',this)">Awards</button>
+  </div>
+
+  <!-- Technology & Data -->
+  <div class="skills-block" id="sec-tech">
+    <div class="block-label">Technology, Intelligence & Data</div>
+    <div class="cols-3">
+      <div class="col">
+        <div class="col-title">AI, Machine Learning & IoT</div>
+        <div class="tools">
+          <div class="tool-item">TensorFlow</div>
+          <div class="tool-item">Scikit-learn</div>
+          <div class="tool-item">Wattif</div>
+          <div class="tool-item">Thingario</div>
+          <div class="tool-item">RadixIoT</div>
+          <div class="tool-item">TDengine</div>
+        </div>
+        <div class="skills-divider">Capabilities</div>
+        <div class="skill-item">Large language model integration</div>
+        <div class="skill-item">Predictive modelling and forecasting</div>
+        <div class="skill-item">IoT hardware and firmware setup</div>
+        <div class="skill-item">Real-time energy monitoring</div>
       </div>
-      <div class="skill-cards">
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">SQL</span>
-            <span class="skill-sub">Structured Query Language</span>
-          </div>
-          <p class="skill-desc">
-            Writing queries for data extraction, filtering, aggregation and joining across relational databases. Used for preparing clean datasets for BI reporting and analysis pipelines.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Proficient</span>
-            <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
-          </div>
+      <div class="col">
+        <div class="col-title">Business Intelligence & Power Platform</div>
+        <div class="tools">
+          <div class="tool-item">Power BI</div>
+          <div class="tool-item">DAX</div>
+          <div class="tool-item">Power Query (M)</div>
+          <div class="tool-item">Power Apps</div>
+          <div class="tool-item">Power Automate</div>
+          <div class="tool-item">Power Pages</div>
+          <div class="tool-item">Tableau</div>
+          <div class="tool-item">ENest</div>
+          <div class="tool-item">Microsoft 365</div>
+          <div class="tool-item">Excel</div>
         </div>
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">DAX</span>
-            <span class="skill-sub">Data Analysis Expressions · Power BI</span>
-          </div>
-          <p class="skill-desc">
-            Building calculated columns, measures, and KPIs within Power BI. Applied in retail and solar energy dashboards to create dynamic, context-aware business metrics.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Proficient</span>
-            <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
-          </div>
+        <div class="skills-divider">Capabilities</div>
+        <div class="skill-item">End-to-end dashboard design</div>
+        <div class="skill-item">Data modelling and star schema</div>
+        <div class="skill-item">Automated reporting workflows</div>
+        <div class="skill-item">KPI design and business storytelling</div>
+      </div>
+      <div class="col">
+        <div class="col-title">Data & Databases</div>
+        <div class="tools">
+          <div class="tool-item">SQL</div>
+          <div class="tool-item">Python</div>
+          <div class="tool-item">MongoDB</div>
+          <div class="tool-item">Supabase</div>
+          <div class="tool-item">Google BigQuery</div>
+          <div class="tool-item">Google Cloud Platform</div>
         </div>
-
+        <div class="skills-divider">Capabilities</div>
+        <div class="skill-item">Database design and management</div>
+        <div class="skill-item">ETL pipeline development</div>
+        <div class="skill-item">Cloud data storage and querying</div>
+        <div class="skill-item">Data cleaning and preparation</div>
       </div>
     </div>
+  </div>
 
-    <!-- Block 2: Visualisation Tools -->
-    <div class="skill-block">
-      <div class="block-label">
-        <span class="block-num">02</span>
-        <span class="block-title">Visualisation & reporting</span>
+  <!-- Marketing & Design -->
+  <div class="skills-block" id="sec-marketing">
+    <div class="block-label">Marketing, Design & Creative</div>
+    <div class="cols-2">
+      <div class="col">
+        <div class="col-title">Marketing Analytics & Digital Tools</div>
+        <div class="tools">
+          <div class="tool-item">Google Search Console</div>
+          <div class="tool-item">Google Analytics</div>
+          <div class="tool-item">Meta Business Suite</div>
+          <div class="tool-item">LinkedIn Campaign Manager</div>
+          <div class="tool-item">TikTok Business Center</div>
+          <div class="tool-item">Mailchimp</div>
+        </div>
+        <div class="skills-divider">Capabilities</div>
+        <div class="skill-item">SEO and search performance analysis</div>
+        <div class="skill-item">Paid campaign planning and optimisation</div>
+        <div class="skill-item">Audience targeting and segmentation</div>
+        <div class="skill-item">Marketing performance reporting</div>
+        <div class="skill-item">Brand strategy and positioning</div>
       </div>
-      <div class="skill-cards">
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">Microsoft Power BI</span>
-            <span class="skill-sub">Dashboard & report development</span>
-          </div>
-          <p class="skill-desc">
-            Designing end-to-end BI dashboards from raw data to interactive visual reports. Experience building retail sales dashboards and solar energy performance reports with drill-through, slicers, and live KPIs.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Proficient</span>
-            <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
-          </div>
+      <div class="col">
+        <div class="col-title">Design, Creative & Development</div>
+        <div class="tools">
+          <div class="tool-item">Adobe Photoshop</div>
+          <div class="tool-item">Adobe Illustrator</div>
+          <div class="tool-item">Adobe Premiere Pro</div>
+          <div class="tool-item">Adobe After Effects</div>
+          <div class="tool-item">Adobe InDesign</div>
+          <div class="tool-item">Adobe Lightroom</div>
+          <div class="tool-item">Figma</div>
+          <div class="tool-item">Webflow</div>
+          <div class="tool-item">WordPress</div>
+          <div class="tool-item">GitHub</div>
+          <div class="tool-item">SketchUp</div>
+          <div class="tool-item">Lumion</div>
         </div>
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">Excel & Power Query</span>
-            <span class="skill-sub">Data cleaning & modelling</span>
-          </div>
-          <p class="skill-desc">
-            Transforming and shaping raw datasets using Power Query's M language. Used as a foundational step in the data pipeline before loading into Power BI for visualisation.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Experienced</span>
-            <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
-          </div>
-        </div>
-
+        <div class="skills-divider">Capabilities</div>
+        <div class="skill-item">UI/UX design and prototyping</div>
+        <div class="skill-item">Website design and development</div>
+        <div class="skill-item">3D architectural visualisation</div>
+        <div class="skill-item">Video production and motion graphics</div>
+        <div class="skill-item">Brand identity and visual systems</div>
       </div>
     </div>
+  </div>
 
-    <!-- Block 3: Cloud Platforms -->
-    <div class="skill-block">
-      <div class="block-label">
-        <span class="block-num">03</span>
-        <span class="block-title">Cloud platforms</span>
+  <!-- Education -->
+  <div class="skills-block" id="sec-education">
+    <div class="block-label">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">Master of Information Technology (Management)</div>
+        <div class="edu-school">Kuala Lumpur University of Science and Technology · KLUST</div>
+        <div class="edu-period">2024 – Present</div>
+        <div class="edu-detail">CGPA 3.74 · In progress</div>
+        <div class="badge-row"><span class="ebadge blue">In progress</span><span class="ebadge green">CGPA 3.74</span></div>
       </div>
-      <div class="skill-cards">
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">Google Cloud Platform</span>
-            <span class="skill-sub">BigQuery · Data storage</span>
-          </div>
-          <p class="skill-desc">
-            Foundational exposure to cloud-based data storage and querying using Google BigQuery. Understanding of how cloud infrastructure supports scalable BI solutions and data warehousing.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Familiar</span>
-            <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-          </div>
-        </div>
-
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Business Administration Honours (Management)</div>
+        <div class="edu-school">Infrastructure University Kuala Lumpur · IUKL</div>
+        <div class="edu-period">2019 – 2023</div>
+        <div class="edu-detail">CGPA 3.785 · Dean's List First Class</div>
+        <div class="badge-row"><span class="ebadge green">Dean's List</span><span class="ebadge green">First Class</span><span class="ebadge amber">CGPA 3.785</span></div>
       </div>
-    </div>
-
-    <!-- Block 4: Frameworks & Concepts -->
-    <div class="skill-block">
-      <div class="block-label">
-        <span class="block-num">04</span>
-        <span class="block-title">BI concepts & methods</span>
+      <div class="edu-card">
+        <div class="edu-degree">Foundation in Arts</div>
+        <div class="edu-school">Infrastructure University Kuala Lumpur · IUKL</div>
+        <div class="edu-period">2019/07 – 2020/03</div>
+        <div class="edu-detail">Credit score 51 · CGPA 3.751</div>
+        <div class="badge-row"><span class="ebadge green">CGPA 3.751</span></div>
       </div>
-      <div class="skill-cards">
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">Data storytelling</span>
-            <span class="skill-sub">Insight communication</span>
-          </div>
-          <p class="skill-desc">
-            Translating analytical findings into clear, actionable narratives for non-technical stakeholders. Applying data storytelling principles to guide decision-making in solar operations and retail environments.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Developing</span>
-            <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-name-wrap">
-            <span class="skill-name">ETL & data pipelines</span>
-            <span class="skill-sub">Extract · Transform · Load</span>
-          </div>
-          <p class="skill-desc">
-            Designing basic ETL workflows to extract data from source systems, clean and transform it using Power Query or SQL, and load into reporting layers for BI consumption.
-          </p>
-          <div class="skill-level">
-            <span class="level-label">Developing</span>
-            <div class="bar-track"><div class="bar-fill" style="width:55%"></div></div>
-          </div>
-        </div>
-
+      <div class="edu-card">
+        <div class="edu-degree">Cambridge GCE AS and A Level · IGCSE</div>
+        <div class="edu-school">Pre-university · Jeddah, Saudi Arabia</div>
+        <div class="edu-period">2014 – 2017</div>
+        <div class="edu-detail">A Level: Physics, Mathematics, AICT · IGCSE: ICT A*, Business A, English A*, Physics A · Cambridge IELTS Band 8.5</div>
+        <div class="badge-row"><span class="ebadge green">IELTS 8.5</span><span class="ebadge amber">Cambridge</span></div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /.skill-blocks -->
-
-  <!-- Proficiency key -->
-  <div class="proficiency-key">
-    <span class="key-label">Proficiency key</span>
-    <div class="key-items">
-      <div class="key-item">
-        <div class="key-bar l1"></div>
-        <span class="key-text">Familiar — conceptual understanding</span>
-      </div>
-      <div class="key-item">
-        <div class="key-bar l2"></div>
-        <span class="key-text">Developing — applied in coursework</span>
-      </div>
-      <div class="key-item">
-        <div class="key-bar l3"></div>
-        <span class="key-text">Proficient — used in real projects</span>
-      </div>
+  <!-- Awards -->
+  <div class="skills-block" id="sec-awards">
+    <div class="block-label">Awards and Achievements</div>
+    <div class="awards-list">
+      <div class="award-item"><span class="award-year">2021</span><span class="award-name">1st Place · iDEA Architectural Competition</span></div>
+      <div class="award-item"><span class="award-year">2017</span><span class="award-name">1st Place · BIS Debate Competition · Czech Republic</span></div>
+      <div class="award-item"><span class="award-year">2018</span><span class="award-name">Silver Medal · Gold's Gym Men's Weightlifting Competition</span></div>
+      <div class="award-item"><span class="award-year">Active</span><span class="award-name">Brazilian Jiu-Jitsu · White Belt</span></div>
     </div>
   </div>
 
 </div>
 
-<script>
-  window.addEventListener('load', () => {
-    setTimeout(() => document.body.classList.add('loaded'), 200);
-  });
-</script>
+<footer>
+  <div class="footer-logo">Syed <span>Hamza</span></div>
+  <p class="footer-text">CSC5201 Business Intelligence · KLUST · 2026</p>
+  <a href="https://www.linkedin.com/in/syedhamzaprofile/" target="_blank" class="footer-link">LinkedIn</a>
+</footer>
 
+<script>
+function goTo(id, btn) {
+  document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  var el = document.getElementById(id);
+  if (el) {
+    var top = el.getBoundingClientRect().top + window.pageYOffset - 130;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+}
+
+window.addEventListener('scroll', function() {
+  var ids = ['sec-tech','sec-marketing','sec-education','sec-awards'];
+  var tabs = document.querySelectorAll('.cat-tab');
+  var scrollY = window.pageYOffset + 160;
+  var current = 0;
+  ids.forEach(function(id, i) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top + window.pageYOffset <= scrollY) current = i;
+  });
+  tabs.forEach(function(t, i) {
+    t.classList.toggle('active', i === current);
+  });
+});
+
+window.addEventListener('load', function() {
+  document.querySelectorAll('.bar-fill').forEach(function(bar) {
+    setTimeout(function() { bar.style.width = bar.getAttribute('data-w') + '%'; }, 300);
+  });
+});
+</script>
 </body>
 </html>
