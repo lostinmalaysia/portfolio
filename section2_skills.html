@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Skills — Syed Hamza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:   #ffffff;
+    --navy2:  #f8fafb;
+    --navy3:  #f1f5f9;
+    --gold:   #0d9488;
+    --gold2:  #14b8a6;
+    --gold3:  #0f766e;
+    --white:  #0f172a;
+    --muted:  #64748b;
+    --border: #e2e8f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(13,148,136,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 10% 80%, rgba(13,148,136,0.03) 0%, transparent 40%);
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 56px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── Page wrapper ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 140px 56px 100px;
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 72px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s forwards;
+  }
+
+  .header-left { display: flex; flex-direction: column; gap: 14px; }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-sub {
+    font-size: 0.88rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    text-align: right;
+  }
+
+  /* ── Skill category block ── */
+  .skill-block {
+    border-top: 1px solid var(--border);
+    padding: 48px 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s forwards;
+  }
+
+  .skill-block:nth-child(1) { animation-delay: 0.2s; }
+  .skill-block:nth-child(2) { animation-delay: 0.35s; }
+  .skill-block:nth-child(3) { animation-delay: 0.5s; }
+  .skill-block:nth-child(4) { animation-delay: 0.65s; }
+
+  .block-label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  .block-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: rgba(13,148,136,0.15);
+    line-height: 1;
+  }
+
+  .block-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── Skill cards ── */
+  .skill-cards { display: flex; flex-direction: column; gap: 16px; }
+
+  .skill-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    transition: background 0.25s, border-color 0.25s;
+    cursor: default;
+  }
+
+  .skill-card:hover {
+    background: var(--navy3);
+    border-color: rgba(13,148,136,0.4);
+  }
+
+  .skill-name-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+  .skill-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .skill-sub {
+    font-size: 0.74rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .skill-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── Progress bar ── */
+  .skill-level { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; min-width: 110px; }
+
+  .level-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .bar-track {
+    width: 110px;
+    height: 2px;
+    background: rgba(13,148,136,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s 0.8s ease;
+  }
+
+  body.loaded .bar-fill { transform: scaleX(1); }
+
+  /* ── Proficiency key ── */
+  .proficiency-key {
+    margin-top: 56px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .key-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .key-items { display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .key-item { display: flex; align-items: center; gap: 8px; }
+
+  .key-bar {
+    width: 40px;
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  .key-bar.l1 { background: rgba(13,148,136,0.25); }
+  .key-bar.l2 { background: rgba(13,148,136,0.5); }
+  .key-bar.l3 { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+
+  .key-text {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .page { padding: 110px 28px 60px; }
+    nav { padding: 18px 28px; }
+    .nav-links { display: none; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .section-sub { text-align: left; }
+    .skill-block { grid-template-columns: 1fr; gap: 24px; }
+    .skill-card { grid-template-columns: 1fr; gap: 16px; }
+    .skill-level { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="section6_home.html" style="text-decoration:none;"><div class="nav-logo">SH · Portfolio</div></a>
+  <ul class="nav-links">
+    <li><a href="section1_introduction.html">About</a></li>
+    <li><a href="section2_skills.html" class="active">Skills</a></li>
+    <li><a href="section3_projects.html">Projects</a></li>
+    <li><a href="section4_experience.html">Experience</a></li>
+    <li><a href="section5_dashboards.html" class="nav-cta">Dashboards</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="section-header">
+    <div class="header-left">
+      <div class="eyebrow">Section 02</div>
+      <h1 class="section-title">Technical <em>skills</em><br>& tools</h1>
+    </div>
+    <p class="section-sub">
+      A focused toolkit built around real-world BI work — from querying databases to building interactive dashboards that drive decisions.
+    </p>
+  </div>
+
+  <!-- Block 1: Query & Data Languages -->
+  <div class="skill-blocks">
+
+    <div class="skill-block">
+      <div class="block-label">
+        <span class="block-num">01</span>
+        <span class="block-title">Query & data languages</span>
+      </div>
+      <div class="skill-cards">
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">SQL</span>
+            <span class="skill-sub">Structured Query Language</span>
+          </div>
+          <p class="skill-desc">
+            Writing queries for data extraction, filtering, aggregation and joining across relational databases. Used for preparing clean datasets for BI reporting and analysis pipelines.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Proficient</span>
+            <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">DAX</span>
+            <span class="skill-sub">Data Analysis Expressions · Power BI</span>
+          </div>
+          <p class="skill-desc">
+            Building calculated columns, measures, and KPIs within Power BI. Applied in retail and solar energy dashboards to create dynamic, context-aware business metrics.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Proficient</span>
+            <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Block 2: Visualisation Tools -->
+    <div class="skill-block">
+      <div class="block-label">
+        <span class="block-num">02</span>
+        <span class="block-title">Visualisation & reporting</span>
+      </div>
+      <div class="skill-cards">
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">Microsoft Power BI</span>
+            <span class="skill-sub">Dashboard & report development</span>
+          </div>
+          <p class="skill-desc">
+            Designing end-to-end BI dashboards from raw data to interactive visual reports. Experience building retail sales dashboards and solar energy performance reports with drill-through, slicers, and live KPIs.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Proficient</span>
+            <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">Excel & Power Query</span>
+            <span class="skill-sub">Data cleaning & modelling</span>
+          </div>
+          <p class="skill-desc">
+            Transforming and shaping raw datasets using Power Query's M language. Used as a foundational step in the data pipeline before loading into Power BI for visualisation.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Experienced</span>
+            <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Block 3: Cloud Platforms -->
+    <div class="skill-block">
+      <div class="block-label">
+        <span class="block-num">03</span>
+        <span class="block-title">Cloud platforms</span>
+      </div>
+      <div class="skill-cards">
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">Google Cloud Platform</span>
+            <span class="skill-sub">BigQuery · Data storage</span>
+          </div>
+          <p class="skill-desc">
+            Foundational exposure to cloud-based data storage and querying using Google BigQuery. Understanding of how cloud infrastructure supports scalable BI solutions and data warehousing.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Familiar</span>
+            <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Block 4: Frameworks & Concepts -->
+    <div class="skill-block">
+      <div class="block-label">
+        <span class="block-num">04</span>
+        <span class="block-title">BI concepts & methods</span>
+      </div>
+      <div class="skill-cards">
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">Data storytelling</span>
+            <span class="skill-sub">Insight communication</span>
+          </div>
+          <p class="skill-desc">
+            Translating analytical findings into clear, actionable narratives for non-technical stakeholders. Applying data storytelling principles to guide decision-making in solar operations and retail environments.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Developing</span>
+            <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-name-wrap">
+            <span class="skill-name">ETL & data pipelines</span>
+            <span class="skill-sub">Extract · Transform · Load</span>
+          </div>
+          <p class="skill-desc">
+            Designing basic ETL workflows to extract data from source systems, clean and transform it using Power Query or SQL, and load into reporting layers for BI consumption.
+          </p>
+          <div class="skill-level">
+            <span class="level-label">Developing</span>
+            <div class="bar-track"><div class="bar-fill" style="width:55%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.skill-blocks -->
+
+  <!-- Proficiency key -->
+  <div class="proficiency-key">
+    <span class="key-label">Proficiency key</span>
+    <div class="key-items">
+      <div class="key-item">
+        <div class="key-bar l1"></div>
+        <span class="key-text">Familiar — conceptual understanding</span>
+      </div>
+      <div class="key-item">
+        <div class="key-bar l2"></div>
+        <span class="key-text">Developing — applied in coursework</span>
+      </div>
+      <div class="key-item">
+        <div class="key-bar l3"></div>
+        <span class="key-text">Proficient — used in real projects</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => document.body.classList.add('loaded'), 200);
+  });
+</script>
+
+</body>
+</html>

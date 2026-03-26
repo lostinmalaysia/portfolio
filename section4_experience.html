@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience & Achievements — Syed Hamza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:   #ffffff;
+    --navy2:  #f8fafb;
+    --navy3:  #f1f5f9;
+    --gold:   #0d9488;
+    --gold2:  #14b8a6;
+    --gold3:  #0f766e;
+    --white:  #0f172a;
+    --muted:  #64748b;
+    --border: #e2e8f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(13,148,136,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 10% 80%, rgba(13,148,136,0.03) 0%, transparent 40%);
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 56px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 300;
+    letter-spacing: 0.12em; color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase; transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold); }
+
+  /* ── Page ── */
+  .page {
+    position: relative; z-index: 1;
+    max-width: 1280px; margin: 0 auto;
+    padding: 140px 56px 100px;
+  }
+
+  /* ── Header ── */
+  .section-header {
+    display: flex; align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+  }
+  .header-left { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300; line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    font-size: 0.88rem; color: var(--muted);
+    max-width: 400px; line-height: 1.75; text-align: right;
+  }
+
+  /* ── Layout ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px;
+  }
+
+  .col-label {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  /* ── Experience block ── */
+  .experience-block {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--navy2);
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .exp-header {
+    padding: 32px 36px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 24px;
+  }
+
+  .exp-header-left { display: flex; flex-direction: column; gap: 10px; }
+
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    color: var(--white);
+  }
+  .exp-company span { color: var(--gold); font-style: italic; }
+
+  .exp-role {
+    font-size: 0.82rem; color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .exp-badge {
+    display: flex; flex-direction: column;
+    align-items: flex-end; gap: 6px; flex-shrink: 0;
+  }
+
+  .badge {
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    border-radius: 2px;
+    background: rgba(13,148,136,0.06);
+    white-space: nowrap;
+  }
+
+  .badge.active {
+    background: rgba(13,148,136,0.12);
+    border-color: rgba(13,148,136,0.4);
+    color: var(--gold);
+  }
+
+  /* Contributions */
+  .exp-contributions {
+    padding: 32px 36px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  .contribution {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--navy3);
+    transition: border-color 0.2s;
+  }
+  .contribution:hover { border-color: rgba(13,148,136,0.3); }
+
+  .contrib-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border: 1px solid rgba(13,148,136,0.2);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  .contrib-body { display: flex; flex-direction: column; gap: 5px; }
+
+  .contrib-title {
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--white);
+  }
+
+  .contrib-desc {
+    font-size: 0.79rem; color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── Career plan ── */
+  .career-plan {
+    margin-top: 28px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--navy2);
+    overflow: hidden;
+    opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .plan-header {
+    padding: 24px 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .plan-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300;
+    color: var(--white);
+  }
+
+  .plan-timeline {
+    padding: 32px 36px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+
+  .plan-timeline::before {
+    content: '';
+    position: absolute;
+    left: 54px; top: 32px; bottom: 32px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(13,148,136,0.1));
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 20px;
+    padding: 0 0 28px 0;
+    position: relative;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--navy2);
+    margin-top: 5px;
+    position: relative; z-index: 1;
+    flex-shrink: 0;
+  }
+
+  .tl-dot.future {
+    background: transparent;
+    border-color: rgba(13,148,136,0.4);
+  }
+
+  .tl-content { display: flex; flex-direction: column; gap: 4px; }
+
+  .tl-period {
+    font-size: 0.68rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  .tl-role {
+    font-size: 0.88rem; font-weight: 500; color: var(--white);
+  }
+
+  .tl-desc {
+    font-size: 0.78rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ── Right column ── */
+  .right-col { display: flex; flex-direction: column; gap: 24px; }
+
+  /* Education card */
+  .info-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--navy2);
+    overflow: hidden;
+    opacity: 0; animation: fadeUp 0.8s forwards;
+  }
+  .info-card:nth-child(1) { animation-delay: 0.25s; }
+  .info-card:nth-child(2) { animation-delay: 0.4s; }
+  .info-card:nth-child(3) { animation-delay: 0.55s; }
+
+  .info-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  .info-card-body { padding: 24px; }
+
+  .edu-item { display: flex; flex-direction: column; gap: 6px; }
+
+  .edu-degree {
+    font-size: 0.92rem; font-weight: 500; color: var(--white);
+    line-height: 1.35;
+  }
+
+  .edu-institution {
+    font-size: 0.78rem; color: var(--gold);
+  }
+
+  .edu-detail {
+    font-size: 0.75rem; color: var(--muted);
+    line-height: 1.6; margin-top: 4px;
+  }
+
+  /* Cert card */
+  .cert-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(13,148,136,0.08);
+  }
+  .cert-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .cert-icon {
+    width: 34px; height: 34px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .cert-body { display: flex; flex-direction: column; gap: 3px; }
+  .cert-name { font-size: 0.82rem; font-weight: 500; color: var(--white); }
+  .cert-status { font-size: 0.72rem; color: var(--muted); }
+  .cert-status.pursuing { color: var(--gold); }
+
+  /* Skills snapshot */
+  .snapshot-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .snapshot-item {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--navy3);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+
+  .snapshot-label {
+    font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  .snapshot-value {
+    font-size: 0.85rem; font-weight: 500; color: var(--gold);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1024px) {
+    .content-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .page { padding: 110px 28px 60px; }
+    nav { padding: 18px 28px; }
+    .nav-links { display: none; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .section-sub { text-align: left; }
+    .exp-header { flex-direction: column; gap: 12px; }
+    .exp-badge { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="section6_home.html" style="text-decoration:none;"><div class="nav-logo">SH · Portfolio</div></a>
+  <ul class="nav-links">
+    <li><a href="section1_introduction.html">About</a></li>
+    <li><a href="section2_skills.html">Skills</a></li>
+    <li><a href="section3_projects.html">Projects</a></li>
+    <li><a href="section4_experience.html" class="active">Experience</a></li>
+    <li><a href="section5_dashboards.html" class="nav-cta">Dashboards</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="section-header">
+    <div class="header-left">
+      <div class="eyebrow">Section 04</div>
+      <h1 class="section-title">Experience &<br><em>achievements</em></h1>
+    </div>
+    <p class="section-sub">
+      Bridging renewable energy operations with business intelligence — applying data thinking to real industry challenges.
+    </p>
+  </div>
+
+  <div class="content-grid">
+
+    <!-- Left column -->
+    <div>
+
+      <!-- Work experience -->
+      <div class="col-label">Work experience</div>
+      <div class="experience-block">
+        <div class="exp-header">
+          <div class="exp-header-left">
+            <div class="exp-company">i2 <span>Energy</span></div>
+            <div class="exp-role">Technology & Digital Initiatives · Renewable Energy Sector · Malaysia</div>
+          </div>
+          <div class="exp-badge">
+            <span class="badge active">Current role</span>
+            <span class="badge">1–2 years</span>
+            <span class="badge">Solar PV</span>
+          </div>
+        </div>
+
+        <div class="exp-contributions">
+          <div class="contribution">
+            <div class="contrib-icon">📊</div>
+            <div class="contrib-body">
+              <span class="contrib-title">BI dashboard development</span>
+              <p class="contrib-desc">Designed and maintained the i2 Energy Project Management System (PMS) Power BI dashboard — providing real-time visibility into a RM 27.3M solar PV project pipeline across multiple PICs, clients, and installation sites nationwide.</p>
+            </div>
+          </div>
+          <div class="contribution">
+            <div class="contrib-icon">📋</div>
+            <div class="contrib-body">
+              <span class="contrib-title">Project pipeline tracking & reporting</span>
+              <p class="contrib-desc">Managed a Gantt-based construction tracker covering 15 project stages — from site assessment to client handover — for 30+ active solar PV installation projects, enabling management to proactively identify delayed or stuck projects.</p>
+            </div>
+          </div>
+          <div class="contribution">
+            <div class="contrib-icon">🤖</div>
+            <div class="contrib-body">
+              <span class="contrib-title">AI & IoT technologies</span>
+              <p class="contrib-desc">Recently expanded focus into artificial intelligence and IoT applications within the renewable energy space — exploring how smart sensor data and AI-driven analytics can enhance solar site monitoring, predictive maintenance, and operational efficiency.</p>
+            </div>
+          </div>
+          <div class="contribution">
+            <div class="contrib-icon">⚡</div>
+            <div class="contrib-body">
+              <span class="contrib-title">Digital transformation initiatives</span>
+              <p class="contrib-desc">Contributed to the organisation's shift from disconnected spreadsheet-based operations toward integrated BI reporting — reducing manual reporting time and improving data accuracy for senior management decision-making.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Previous roles -->
+      <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 2px;">
+
+        <div class="experience-block" style="opacity:0; animation: fadeUp 0.8s 0.3s forwards;">
+          <div class="exp-header">
+            <div class="exp-header-left">
+              <div class="exp-company">Tenggara <span>Fresh</span></div>
+              <div class="exp-role">Senior Consultant · Johor Bahru, Malaysia</div>
+            </div>
+            <div class="exp-badge">
+              <span class="badge active">Current</span>
+              <span class="badge">Nov 2024–present</span>
+            </div>
+          </div>
+          <div class="exp-contributions">
+            <div class="contribution">
+              <div class="contrib-icon">🌿</div>
+              <div class="contrib-body">
+                <span class="contrib-title">Data-driven business strategy</span>
+                <p class="contrib-desc">Provided strategic guidance to enhance business growth and operational efficiency at a fresh fruits and beverages company — advising on market trends, product strategies, and customer-centric approaches using data-backed insights.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="experience-block" style="opacity:0; animation: fadeUp 0.8s 0.45s forwards;">
+          <div class="exp-header">
+            <div class="exp-header-left">
+              <div class="exp-company">IUKL — <span>Creative Executive</span></div>
+              <div class="exp-role">Infrastructure University Kuala Lumpur · Malaysia · Hybrid</div>
+            </div>
+            <div class="exp-badge">
+              <span class="badge">Mar 2019–Dec 2023</span>
+              <span class="badge">4 yrs 10 mos</span>
+            </div>
+          </div>
+          <div class="exp-contributions">
+            <div class="contribution">
+              <div class="contrib-icon">🎨</div>
+              <div class="contrib-body">
+                <span class="contrib-title">Digital marketing & brand direction</span>
+                <p class="contrib-desc">Oversaw creative direction for the university's digital marketing and physical branding — conceptualising campaigns, producing multimedia content, and building brand consistency across all communication channels including a comprehensive brand book.</p>
+              </div>
+            </div>
+            <div class="contribution">
+              <div class="contrib-icon">📸</div>
+              <div class="contrib-body">
+                <span class="contrib-title">Content production & storytelling</span>
+                <p class="contrib-desc">Produced promotional videos, event photography, and corporate headshots — developing strong visual storytelling skills that directly inform how data insights are communicated to non-technical audiences in a BI context.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="experience-block" style="opacity:0; animation: fadeUp 0.8s 0.6s forwards;">
+          <div class="exp-header">
+            <div class="exp-header-left">
+              <div class="exp-company">Schulich <span>Engineering</span></div>
+              <div class="exp-role">Content Writer & Copy Editor · University of Calgary · Remote</div>
+            </div>
+            <div class="exp-badge">
+              <span class="badge">Sep 2019–Dec 2022</span>
+              <span class="badge">3 yrs 4 mos</span>
+            </div>
+          </div>
+          <div class="exp-contributions">
+            <div class="contribution">
+              <div class="contrib-icon">✍️</div>
+              <div class="contrib-body">
+                <span class="contrib-title">Academic writing & research communication</span>
+                <p class="contrib-desc">Composed and refined engineering research papers for esteemed scholars at a Canadian university — developing meticulous attention to detail, analytical precision, and the ability to communicate complex technical ideas clearly to diverse audiences.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Career plan -->
+      <div class="career-plan">
+        <div class="plan-header">
+          <div class="col-label" style="margin-bottom:8px">Career roadmap</div>
+          <div class="plan-title">Technology & digital initiatives pathway</div>
+        </div>
+        <div class="plan-timeline">
+          <div class="timeline-item">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <span class="tl-period">Now · 2024–2025</span>
+              <span class="tl-role">Technology & Digital Initiatives — i2 Energy</span>
+              <p class="tl-desc">Building BI systems for solar operations, completing MSc Business Intelligence at KLUST, developing expertise in Power BI and data-driven project management.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot future"></div>
+            <div class="tl-content">
+              <span class="tl-period">Near term · 2026</span>
+              <span class="tl-role">Microsoft Certified: Power BI Data Analyst Associate</span>
+              <p class="tl-desc">Pursue formal certification to validate BI skills and strengthen credibility for enterprise-level data roles.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot future"></div>
+            <div class="tl-content">
+              <span class="tl-period">Medium term · 2026–2027</span>
+              <span class="tl-role">Lead BI & Digital Transformation</span>
+              <p class="tl-desc">Scale BI capabilities across the organisation — designing enterprise data systems that connect operations, finance, and project delivery into a single analytical layer.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot future"></div>
+            <div class="tl-content">
+              <span class="tl-period">Long term · 2028+</span>
+              <span class="tl-role">Technology & Digital Strategy — Renewable Energy Sector</span>
+              <p class="tl-desc">Drive data-led digital transformation in the renewable energy space — where BI and technology directly accelerate Malaysia's transition to sustainable energy infrastructure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right column -->
+    <div class="right-col">
+
+      <!-- Education -->
+      <div class="info-card">
+        <div class="info-card-header">Education</div>
+        <div class="info-card-body">
+          <div class="edu-item">
+            <span class="edu-degree">Master of Science in Computer Science (Business Intelligence)</span>
+            <span class="edu-institution">Kuala Lumpur University of Science & Technology · KLUST</span>
+            <p class="edu-detail">Specialising in BI tools, data analytics, and strategic decision-making. Currently completing the CSC5201 Business Intelligence module covering Power BI, data warehousing, and BI implementation strategy.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div class="info-card">
+        <div class="info-card-header">Certifications & development</div>
+        <div class="info-card-body" style="display:flex; flex-direction:column; gap:0;">
+          <div class="cert-item">
+            <div class="cert-icon">🎓</div>
+            <div class="cert-body">
+              <span class="cert-name">MSc Business Intelligence</span>
+              <span class="cert-status pursuing">In progress · KLUST 2025</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon">📘</div>
+            <div class="cert-body">
+              <span class="cert-name">Microsoft Learn — Power BI training path</span>
+              <span class="cert-status pursuing">Completed modules · learn.microsoft.com</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon">🏅</div>
+            <div class="cert-body">
+              <span class="cert-name">Microsoft Certified: Power BI Data Analyst Associate</span>
+              <span class="cert-status pursuing">Pursuing · target 2026</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon">☁️</div>
+            <div class="cert-body">
+              <span class="cert-name">Google Data Analytics Certificate</span>
+              <span class="cert-status">Planned · target 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stats -->
+      <div class="info-card">
+        <div class="info-card-header">At a glance</div>
+        <div class="info-card-body">
+          <div class="snapshot-grid">
+            <div class="snapshot-item">
+              <span class="snapshot-label">Industry</span>
+              <span class="snapshot-value">Solar / Renewables</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Experience</span>
+              <span class="snapshot-value">1–2 years</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">BI tool</span>
+              <span class="snapshot-value">Power BI</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Projects tracked</span>
+              <span class="snapshot-value">30+ live sites</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Pipeline managed</span>
+              <span class="snapshot-value">RM 27.3M</span>
+            </div>
+            <div class="snapshot-item">
+              <span class="snapshot-label">Study level</span>
+              <span class="snapshot-value">MSc · in progress</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

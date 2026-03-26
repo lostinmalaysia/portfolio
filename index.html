@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Hamza — BI & Data Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg:#ffffff; --bg2:#f8fafb; --bg3:#f1f5f9;
+    --teal:#0d9488; --teal2:#14b8a6; --teal3:#99f6e4;
+    --dark:#0f172a; --mid:#334155; --muted:#64748b; --light:#94a3b8;
+    --border:#e2e8f0; --border2:rgba(13,148,136,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body { background:var(--bg); color:var(--dark); font-family:'DM Sans',sans-serif; font-weight:300; overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 56px;
+    background:rgba(255,255,255,0.92);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; letter-spacing:0.08em; color:var(--dark); }
+  .nav-logo span { color:var(--teal); }
+  .nav-links { display:flex; gap:32px; list-style:none; align-items:center; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--teal); }
+  .nav-cta { background:var(--teal) !important; color:#fff !important; padding:7px 18px; border-radius:4px; }
+  .nav-cta:hover { background:#0f766e !important; }
+
+  .hero {
+    min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+    align-items:center; gap:60px; padding:120px 56px 80px;
+    max-width:1280px; margin:0 auto; position:relative;
+  }
+  .hero::before {
+    content:''; position:fixed; inset:0; z-index:-1;
+    background: radial-gradient(circle at 80% 20%, rgba(13,148,136,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(13,148,136,0.04) 0%, transparent 40%);
+  }
+
+  .hero-left { display:flex; flex-direction:column; gap:24px; }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(13,148,136,0.08); border:1px solid rgba(13,148,136,0.2);
+    color:var(--teal); padding:6px 14px; border-radius:20px;
+    font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:500;
+    width:fit-content; opacity:0; animation:fadeUp 0.7s 0.2s forwards;
+  }
+  .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--teal); animation:badgePulse 2s infinite; }
+  @keyframes badgePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+  .hero-name {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,5vw,4.8rem);
+    font-weight:300; line-height:1.05; color:var(--dark);
+    opacity:0; animation:fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-name em { font-style:italic; color:var(--teal); }
+
+  .hero-specialise {
+    font-size:1rem; color:var(--mid); line-height:1.7; font-weight:300;
+    opacity:0; animation:fadeUp 0.8s 0.45s forwards; max-width:480px;
+  }
+
+  .typing-wrap { display:flex; align-items:center; gap:10px; opacity:0; animation:fadeUp 0.8s 0.55s forwards; }
+  .typing-label { font-size:0.75rem; color:var(--light); letter-spacing:0.06em; text-transform:uppercase; white-space:nowrap; }
+  .typing-text { font-size:0.88rem; font-weight:500; color:var(--teal); min-width:260px; border-right:2px solid var(--teal); padding-right:4px; animation:blink 0.8s step-end infinite; white-space:nowrap; overflow:hidden; }
+  @keyframes blink { 0%,100%{border-color:var(--teal)} 50%{border-color:transparent} }
+
+  .hero-tags { display:flex; flex-wrap:wrap; gap:8px; opacity:0; animation:fadeUp 0.8s 0.65s forwards; }
+  .htag { background:var(--bg3); border:1px solid var(--border); color:var(--mid); padding:5px 14px; border-radius:3px; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; transition:border-color 0.2s,color 0.2s; }
+  .htag:hover { border-color:var(--teal2); color:var(--teal); }
+
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.8s 0.75s forwards; }
+  .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--teal); color:#fff; text-decoration:none; padding:12px 28px; font-size:0.8rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; border-radius:4px; transition:background 0.2s,transform 0.2s; }
+  .btn-primary:hover { background:#0f766e; transform:translateY(-2px); }
+  .btn-outline { display:inline-flex; align-items:center; gap:8px; border:1.5px solid var(--border); color:var(--mid); text-decoration:none; padding:12px 28px; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; border-radius:4px; transition:border-color 0.2s,color 0.2s,transform 0.2s; }
+  .btn-outline:hover { border-color:var(--teal); color:var(--teal); transform:translateY(-2px); }
+
+  .hero-right { opacity:0; animation:fadeIn 1s 0.5s forwards; position:relative; }
+
+  .mockup { background:var(--bg2); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(15,23,42,0.08),0 4px 16px rgba(15,23,42,0.04); }
+  .mockup-bar { background:var(--bg3); border-bottom:1px solid var(--border); padding:10px 16px; display:flex; align-items:center; gap:10px; }
+  .dot-row { display:flex; gap:6px; }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dot.r { background:#fca5a5; }
+  .dot.y { background:#fcd34d; }
+  .dot.g { background:#6ee7b7; }
+  .url-bar { flex:1; background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:4px 12px; font-size:0.72rem; color:var(--muted); }
+
+  .mockup-body { padding:16px; display:flex; flex-direction:column; gap:12px; }
+
+  .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .kpi-card { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:10px 12px; }
+  .kpi-val { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--dark); font-weight:400; line-height:1; }
+  .kpi-label { font-size:0.6rem; color:var(--light); letter-spacing:0.08em; text-transform:uppercase; margin-top:3px; }
+  .kpi-delta { font-size:0.62rem; color:var(--teal); font-weight:500; margin-top:2px; }
+
+  .chart-row { display:grid; grid-template-columns:1.6fr 1fr; gap:8px; }
+  .chart-card { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:12px; }
+  .chart-title { font-size:0.65rem; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; font-weight:500; }
+
+  .bar-chart { display:flex; align-items:flex-end; gap:5px; height:70px; }
+  .bar { flex:1; border-radius:3px 3px 0 0; background:var(--teal3); transition:height 0.8s ease,background 0.3s; }
+  .bar.active { background:var(--teal); }
+
+  .donut-wrap { display:flex; align-items:center; justify-content:center; gap:12px; height:70px; }
+  .donut svg { width:64px; height:64px; }
+  .donut-legend { display:flex; flex-direction:column; gap:5px; }
+  .legend-item { display:flex; align-items:center; gap:6px; font-size:0.62rem; color:var(--muted); }
+  .legend-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+
+  .table-card { background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  .table-head { display:grid; grid-template-columns:1fr 80px 60px 70px; gap:8px; padding:7px 12px; background:var(--bg3); border-bottom:1px solid var(--border); font-size:0.6rem; color:var(--light); letter-spacing:0.08em; text-transform:uppercase; }
+  .table-row { display:grid; grid-template-columns:1fr 80px 60px 70px; gap:8px; padding:6px 12px; border-bottom:1px solid var(--border); font-size:0.65rem; color:var(--mid); align-items:center; }
+  .table-row:last-child { border-bottom:none; }
+  .status-pill { font-size:0.58rem; padding:2px 7px; border-radius:10px; font-weight:500; width:fit-content; }
+  .status-pill.optimal { background:rgba(13,148,136,0.1); color:var(--teal); }
+  .status-pill.low { background:rgba(239,68,68,0.1); color:#dc2626; }
+  .status-pill.high { background:rgba(245,158,11,0.1); color:#d97706; }
+
+  .sections-area { max-width:1280px; margin:0 auto; padding:80px 56px 100px; border-top:1px solid var(--border); }
+  .area-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; }
+  .area-eyebrow { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:10px; }
+  .area-title { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:300; color:var(--dark); }
+  .area-title em { font-style:italic; color:var(--teal); }
+  .area-sub { font-size:0.82rem; color:var(--muted); max-width:300px; line-height:1.7; text-align:right; }
+
+  .cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .section-card { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:28px 24px; text-decoration:none; display:flex; flex-direction:column; gap:16px; transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s; }
+  .section-card:hover { border-color:var(--teal2); box-shadow:0 8px 24px rgba(13,148,136,0.08); transform:translateY(-3px); }
+  .card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .card-num { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(13,148,136,0.18); line-height:1; }
+  .card-arrow { width:28px; height:28px; border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--light); font-size:0.9rem; transition:background 0.2s,border-color 0.2s,color 0.2s; }
+  .section-card:hover .card-arrow { background:rgba(13,148,136,0.08); border-color:var(--teal2); color:var(--teal); }
+  .card-label { font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); margin-bottom:4px; }
+  .card-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--dark); line-height:1.3; }
+  .card-desc { font-size:0.77rem; color:var(--muted); line-height:1.65; }
+  .card-tags { display:flex; gap:6px; flex-wrap:wrap; }
+  .ctag { font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); border:1px solid var(--border); padding:2px 8px; border-radius:3px; background:var(--bg3); }
+
+  footer { border-top:1px solid var(--border); padding:28px 56px; max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--dark); letter-spacing:0.08em; }
+  .footer-logo span { color:var(--teal); }
+  .footer-text { font-size:0.72rem; color:var(--light); }
+  .footer-link { color:var(--muted); text-decoration:none; font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; transition:color 0.2s; }
+  .footer-link:hover { color:var(--teal); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  @media(max-width:1024px) { .hero{grid-template-columns:1fr;padding:100px 28px 60px;} .hero-right{display:none;} .cards-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:640px) { nav{padding:16px 20px;} .nav-links{display:none;} .sections-area{padding:60px 20px;} .cards-grid{grid-template-columns:1fr;} footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Syed <span>Hamza</span></div>
+  <ul class="nav-links">
+    <li><a href="section1_introduction.html">About</a></li>
+    <li><a href="section2_skills.html">Skills</a></li>
+    <li><a href="section3_projects.html">Projects</a></li>
+    <li><a href="section4_experience.html">Experience</a></li>
+    <li><a href="section5_dashboards.html" class="nav-cta">Dashboards</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><div class="badge-dot"></div>MSc Business Intelligence · KLUST</div>
+    <h1 class="hero-name">Business<br><em>Intelligence</em><br>Specialist</h1>
+    <p class="hero-specialise">I design BI systems that turn operational data into decisions — managing a <strong style="color:var(--teal);font-weight:500;">RM 27.3M solar project pipeline</strong> at i2 Energy and building dashboards that help organisations move faster and smarter.</p>
+    <div class="typing-wrap">
+      <span class="typing-label">Currently working on</span>
+      <span class="typing-text" id="typer"></span>
+    </div>
+    <div class="hero-tags">
+      <span class="htag">Power BI</span>
+      <span class="htag">DAX & SQL</span>
+      <span class="htag">Solar energy</span>
+      <span class="htag">AI & IoT</span>
+      <span class="htag">Data storytelling</span>
+    </div>
+    <div class="hero-cta">
+      <a href="section3_projects.html" class="btn-primary">View projects <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="section5_dashboards.html" class="btn-outline">Live dashboards →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot-row"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <div class="url-bar">app.powerbi.com · Retail Chain Dashboard</div>
+      </div>
+      <div class="mockup-body">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-val">3.56M</div><div class="kpi-label">Total revenue</div><div class="kpi-delta">↑ 12.4%</div></div>
+          <div class="kpi-card"><div class="kpi-val">1.60M</div><div class="kpi-label">Gross profit</div><div class="kpi-delta">↑ 8.1%</div></div>
+          <div class="kpi-card"><div class="kpi-val">800</div><div class="kpi-label">Customers</div><div class="kpi-delta">↑ 5.2%</div></div>
+          <div class="kpi-card"><div class="kpi-val">2,000</div><div class="kpi-label">Transactions</div><div class="kpi-delta">↑ 3.8%</div></div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <div class="chart-title">Monthly revenue trend</div>
+            <div class="bar-chart">
+              <div class="bar" style="height:72%"></div><div class="bar" style="height:80%"></div>
+              <div class="bar" style="height:62%"></div><div class="bar" style="height:55%"></div>
+              <div class="bar" style="height:88%"></div><div class="bar active" style="height:95%"></div>
+              <div class="bar" style="height:78%"></div><div class="bar" style="height:65%"></div>
+              <div class="bar" style="height:70%"></div><div class="bar" style="height:58%"></div>
+              <div class="bar" style="height:72%"></div><div class="bar" style="height:68%"></div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Customer segments</div>
+            <div class="donut-wrap">
+              <div class="donut">
+                <svg viewBox="0 0 42 42">
+                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#e2e8f0" stroke-width="6"/>
+                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#0d9488" stroke-width="6" stroke-dasharray="45 55" stroke-dashoffset="25"/>
+                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#99f6e4" stroke-width="6" stroke-dasharray="35 65" stroke-dashoffset="-20"/>
+                </svg>
+              </div>
+              <div class="donut-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:#0d9488"></div>VIP 45%</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#99f6e4"></div>Regular 35%</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0"></div>Occasional 20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-head"><span>Store location</span><span>Revenue</span><span>Stock</span><span>Status</span></div>
+          <div class="table-row"><span>Mid Valley</span><span style="color:var(--teal);font-weight:500">RM 430K</span><span>Optimal</span><span><div class="status-pill optimal">Optimal</div></span></div>
+          <div class="table-row"><span>IOI City Mall</span><span style="color:var(--teal);font-weight:500">RM 398K</span><span>Low</span><span><div class="status-pill low">Low stock</div></span></div>
+          <div class="table-row"><span>Gurney Plaza</span><span style="color:var(--teal);font-weight:500">RM 372K</span><span>High</span><span><div class="status-pill high">Overstock</div></span></div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:-14px;right:20px;background:var(--teal);color:#fff;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:3px;font-weight:500;">Live Power BI · Retail dashboard</div>
+  </div>
+</section>
+
+<div class="sections-area">
+  <div class="area-header">
+    <div><div class="area-eyebrow">Portfolio sections</div><h2 class="area-title">Explore the <em>portfolio</em></h2></div>
+    <p class="area-sub">Six sections covering identity, skills, real-world projects, experience, and live dashboards.</p>
+  </div>
+  <div class="cards-grid">
+    <a href="section1_introduction.html" class="section-card">
+      <div class="card-top"><span class="card-num">01</span><div class="card-arrow">→</div></div>
+      <div><div class="card-label">Introduction</div><div class="card-title">Personal branding & bio</div></div>
+      <p class="card-desc">Who I am, what I do, and where I'm headed — a professional introduction to my background in renewable energy and business intelligence.</p>
+      <div class="card-tags"><span class="ctag">Bio</span><span class="ctag">Career goals</span><span class="ctag">LinkedIn</span></div>
+    </a>
+    <a href="section2_skills.html" class="section-card">
+      <div class="card-top"><span class="card-num">02</span><div class="card-arrow">→</div></div>
+      <div><div class="card-label">Technical skills</div><div class="card-title">Tools & technologies</div></div>
+      <p class="card-desc">A focused toolkit built around real BI work — DAX, SQL, Power BI, Power Query, and Google Cloud with honest proficiency ratings.</p>
+      <div class="card-tags"><span class="ctag">Power BI</span><span class="ctag">DAX</span><span class="ctag">SQL</span><span class="ctag">GCP</span></div>
+    </a>
+    <a href="section3_projects.html" class="section-card">
+      <div class="card-top"><span class="card-num">03</span><div class="card-arrow">→</div></div>
+      <div><div class="card-label">Projects</div><div class="card-title">Case studies & BI projects</div></div>
+      <p class="card-desc">Four end-to-end projects — retail chain analytics, solar energy pipeline intelligence, Microsoft Learn training, and data storytelling.</p>
+      <div class="card-tags"><span class="ctag">Retail BI</span><span class="ctag">Solar PMS</span><span class="ctag">Storytelling</span></div>
+    </a>
+    <a href="section4_experience.html" class="section-card">
+      <div class="card-top"><span class="card-num">04</span><div class="card-arrow">→</div></div>
+      <div><div class="card-label">Experience</div><div class="card-title">Work history & career plan</div></div>
+      <p class="card-desc">From i2 Energy's solar operations to academic research writing at a Canadian university — a career built on data, digital, and leadership.</p>
+      <div class="card-tags"><span class="ctag">i2 Energy</span><span class="ctag">IUKL</span><span class="ctag">AI & IoT</span></div>
+    </a>
+    <a href="section5_dashboards.html" class="section-card">
+      <div class="card-top"><span class="card-num">05</span><div class="card-arrow">→</div></div>
+      <div><div class="card-label">Dashboards</div><div class="card-title">Interactive reports & live embeds</div></div>
+      <p class="card-desc">Live Power BI retail dashboard and solar PMS evidence — real data, fully interactive, directly explorable in the browser.</p>
+      <div class="card-tags"><span class="ctag">Live embed</span><span class="ctag">Power BI</span><span class="ctag">RM 27.3M</span></div>
+    </a>
+    <a href="#" class="section-card" style="border-style:dashed;opacity:0.4;pointer-events:none;">
+      <div class="card-top"><span class="card-num">06</span><div class="card-arrow" style="opacity:0.3;">◎</div></div>
+      <div><div class="card-label">This page</div><div class="card-title">BVLOG homepage</div></div>
+      <p class="card-desc">The portfolio hub — animated hero, section navigation, and the overall aesthetic of this BVLOG.</p>
+      <div class="card-tags"><span class="ctag">VLOG</span><span class="ctag">Navigation</span><span class="ctag">Aesthetics</span></div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Syed <span>Hamza</span></div>
+  <p class="footer-text">CSC5201 Business Intelligence · KLUST · 2025</p>
+  <a href="https://linkedin.com/in/syedhamza" target="_blank" class="footer-link">LinkedIn →</a>
+</footer>
+
+<script>
+  const phrases = ['Solar PV pipeline analytics','Power BI dashboard design','AI & IoT in renewable energy','MSc BI · KLUST 2025','Data-driven project management'];
+  let pi=0,ci=0,deleting=false;
+  const el=document.getElementById('typer');
+  function type(){
+    const phrase=phrases[pi];
+    if(!deleting){el.textContent=phrase.slice(0,++ci);if(ci===phrase.length){deleting=true;setTimeout(type,1800);return;}}
+    else{el.textContent=phrase.slice(0,--ci);if(ci===0){deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,300);return;}}
+    setTimeout(type,deleting?40:70);
+  }
+  setTimeout(type,1200);
+
+  window.addEventListener('load',()=>{
+    document.querySelectorAll('.bar').forEach((b,i)=>{
+      const h=b.style.height; b.style.height='0';
+      setTimeout(()=>{b.style.height=h;},600+i*60);
+    });
+  });
+
+  const bars=document.querySelectorAll('.bar');
+  let ab=5;
+  setInterval(()=>{bars[ab].classList.remove('active');ab=(ab+1)%bars.length;bars[ab].classList.add('active');},1200);
+</script>
+</body>
+</html>

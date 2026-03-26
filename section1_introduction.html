@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Hamza — BI Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:    #ffffff;
+    --navy2:   #f8fafb;
+    --navy3:   #f1f5f9;
+    --gold:    #0d9488;
+    --gold2:   #14b8a6;
+    --gold3:   #0f766e;
+    --white:   #0f172a;
+    --muted:   #64748b;
+    --border:  #e2e8f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background texture ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(13,148,136,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 10% 80%, rgba(13,148,136,0.03) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Grid lines ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 56px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    align-items: center;
+    gap: 60px;
+    padding: 120px 56px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .hero-left { display: flex; flex-direction: column; gap: 28px; }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s forwards;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6vw, 5.2rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.2s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .tagline {
+    font-size: 1.02rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 520px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+
+  .tag {
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-radius: 2px;
+    background: rgba(13,148,136,0.06);
+  }
+
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 28px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: #0f766e; transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  .btn-ghost:hover { color: var(--gold); }
+
+  /* ── Photo card ── */
+  .hero-right {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1.1s 0.4s forwards;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-height: 520px;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--muted);
+  }
+
+  .photo-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px dashed rgba(13,148,136,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+
+  .photo-placeholder p {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(13,148,136,0.4);
+  }
+
+  .frame-deco {
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    width: 80%;
+    height: 80%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .stat-bar {
+    position: absolute;
+    bottom: 24px;
+    left: -24px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 22px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 24px;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── Bio section ── */
+  .bio-section {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 56px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 80px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 6px;
+  }
+
+  .bio-content { display: flex; flex-direction: column; gap: 32px; }
+
+  .bio-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .bio-heading span { color: var(--gold); font-style: italic; }
+
+  .bio-body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 640px;
+  }
+
+  .bio-body p + p { margin-top: 18px; }
+
+  /* ── Goals ── */
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+
+  .goal-card {
+    background: var(--navy2);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.25s;
+  }
+
+  .goal-card:hover { background: var(--navy3); }
+
+  .goal-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: rgba(13,148,136,0.15);
+    line-height: 1;
+  }
+
+  .goal-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  .goal-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── LinkedIn strip ── */
+  .link-strip {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 56px 100px;
+  }
+
+  .link-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,148,136,0.03);
+    transition: background 0.25s;
+  }
+
+  .link-card:hover { background: rgba(13,148,136,0.06); }
+
+  .link-info { display: flex; align-items: center; gap: 20px; }
+
+  .link-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 3px;
+    background: #0077b5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    flex-shrink: 0;
+  }
+
+  .link-text h4 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .link-text p {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    text-decoration: none;
+    padding: 9px 22px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .link-btn:hover { border-color: var(--gold); background: rgba(13,148,136,0.08); }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Divider ── */
+  .accent-line {
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 1px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 100px 28px 60px; }
+    .hero-right { max-width: 340px; margin: 0 auto; }
+    .bio-section { grid-template-columns: 1fr; gap: 24px; padding: 60px 28px; }
+    .goals-grid { grid-template-columns: 1fr; }
+    nav { padding: 18px 28px; }
+    .nav-links { display: none; }
+    .link-strip { padding: 0 28px 60px; }
+    .stat-bar { left: 0; right: 0; bottom: -20px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="section6_home.html" style="text-decoration:none;"><div class="nav-logo">SH · Portfolio</div></a>
+  <ul class="nav-links">
+    <li><a href="section1_introduction.html" class="active">About</a></li>
+    <li><a href="section2_skills.html">Skills</a></li>
+    <li><a href="section3_projects.html">Projects</a></li>
+    <li><a href="section4_experience.html">Experience</a></li>
+    <li><a href="section5_dashboards.html" class="nav-cta">Dashboards</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="about">
+  <div class="hero-left">
+    <div class="eyebrow">BI & Data Portfolio</div>
+
+    <h1 class="hero-name">
+      Syed<br><em>Hamza</em>
+    </h1>
+
+    <p class="tagline">
+      Analyst in renewable energy by profession, business intelligence specialist in the making. I turn solar data into strategic decisions — and raw numbers into competitive advantage.
+    </p>
+
+    <div class="hero-tags">
+      <span class="tag">Power BI</span>
+      <span class="tag">Data Analytics</span>
+      <span class="tag">Solar Energy</span>
+      <span class="tag">MSc BI · KLUST</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">
+        View Projects
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/syedhamza" target="_blank" class="btn-ghost">
+        LinkedIn Profile →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-frame">
+      <div class="photo-placeholder">
+        <div class="photo-icon">🖼</div>
+        <p>Your photo here</p>
+      </div>
+    </div>
+    <div class="frame-deco"></div>
+
+    <div class="stat-bar">
+      <div class="stat">
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Years in solar</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">BI projects</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">MSc</span>
+        <span class="stat-label">In progress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bio -->
+<section class="bio-section">
+  <div class="section-label">About me</div>
+  <div class="bio-content">
+    <h2 class="bio-heading">
+      Where <span>energy data</span><br>meets strategy
+    </h2>
+
+    <div class="bio-body">
+      <p>
+        I am Syed Hamza — an analyst working in the renewable energy sector and a postgraduate student pursuing a Master's in Computer Science (Business Intelligence) at Kuala Lumpur University of Science and Technology (KLUST). My day-to-day work places me at the intersection of solar operations and data — where decisions made from insight directly affect energy output and business performance.
+      </p>
+      <p>
+        My interest in business intelligence stems from a simple conviction: organisations that understand their data move faster, adapt smarter, and lead longer. Working in solar has given me a front-row seat to how powerful the right dashboard or the right analysis can be — and how much value remains untapped when data is underutilised.
+      </p>
+      <p>
+        This portfolio is a record of that journey — from foundational BI concepts to real-world projects spanning retail analytics and renewable energy intelligence.
+      </p>
+    </div>
+
+    <div class="goals-grid">
+      <div class="goal-card">
+        <span class="goal-num">01</span>
+        <div class="accent-line"></div>
+        <span class="goal-title">Technology & Digital Initiatives</span>
+        <p class="goal-desc">Lead data transformation and digital adoption strategies within forward-thinking organisations.</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-num">02</span>
+        <div class="accent-line"></div>
+        <span class="goal-title">BI in Renewable Energy</span>
+        <p class="goal-desc">Apply intelligence systems to accelerate the shift towards sustainable, data-driven energy operations.</p>
+      </div>
+      <div class="goal-card">
+        <span class="goal-num">03</span>
+        <div class="accent-line"></div>
+        <span class="goal-title">Strategic Decision Making</span>
+        <p class="goal-desc">Bridge the gap between raw data and executive insight — making BI a competitive tool at every level.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LinkedIn -->
+<div class="link-strip" id="contact">
+  <div class="link-card">
+    <div class="link-info">
+      <div class="link-icon">in</div>
+      <div class="link-text">
+        <h4>Syed Hamza</h4>
+        <p>linkedin.com/in/your-profile · Connect professionally</p>
+      </div>
+    </div>
+    <a href="https://linkedin.com/in/syedhamza" target="_blank" class="link-btn">
+      View Profile →
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
